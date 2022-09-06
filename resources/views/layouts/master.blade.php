@@ -8,7 +8,7 @@ $path = asset('/');
 
 <head>
     <base href="">
-    <title>@yield('title') | Zinedroid</title>
+    <title>@yield('title') | Brandko</title>
     <meta charset="utf-8" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -60,7 +60,7 @@ $path = asset('/');
             @include('includes.header')
             <!--end::Header-->
             <!--begin::Wrapper-->
-            <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+            <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">`
                 <!--begin::sidebar-->
                 @include('includes.sidebar')
                 <!--end::sidebar-->
@@ -72,7 +72,7 @@ $path = asset('/');
                         <!--begin::Toolbar-->
                         <div id="kt_app_toolbar" class="app-toolbar py-3">
                             <!--begin::Toolbar container-->
-                            <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+                            <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
                                 <!--begin::Page title-->
 
                                 <!--end::Page title-->
@@ -107,7 +107,7 @@ $path = asset('/');
 
 
     <!--begin::Scrolltop-->
-    <div id="kt_scrolltop" class="scrolltop" data-kt-sc Frolltop="true">
+    <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
         <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
         <span class="svg-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -151,6 +151,7 @@ $path = asset('/');
     <script src="https://cdn.tiny.cloud/1/xglc7avqzi80ti3arayewa85tmhzedfpl4iioptnx4dzgxvr/tinymce/5/tinymce.min.js"
         referrerpolicy="origin"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
 
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
