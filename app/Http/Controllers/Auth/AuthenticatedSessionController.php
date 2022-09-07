@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Attendance;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -17,6 +19,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
+
         return view('auth.login');
     }
 
@@ -31,7 +34,6 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -43,8 +45,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
+        $ip = request()->ip();
+        // $ip = '103.38.12.3';
+        $data = \Location::get($ip);
+        $attendance = Attendance::where('date',Carbon::now()->toDateString())->where('user_id',Auth::id())->latest()->first();
+        $attendance->out = Carbon::now()->toTimeString();
+        if($data && $data->cityName)
+        {
+            $attendance->out_location = $data->cityName;
+        }
+        $attendance->save();
+        // dd($attendance);
         Auth::guard('web')->logout();
-
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();

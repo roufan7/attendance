@@ -53,11 +53,7 @@
         }
     }
 </style>
-{{-- @php
-use Illuminate\Support\Collection;
-use Spatie\Permission\Models\Permission;
-$allPermissions = Permission::pluck('id')->toArray();
-@endphp --}}
+
 
 <div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar"
     data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px"
@@ -81,6 +77,7 @@ $allPermissions = Permission::pluck('id')->toArray();
     {{-- @endif --}}
     <!--end::Logo-->
     <!--begin::sidebar menu-->
+    @role('Admin')
     <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
         <!--begin::Menu wrapper-->
         <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5"
@@ -178,7 +175,7 @@ $allPermissions = Permission::pluck('id')->toArray();
                 </div>
                 <div class="menu-item  ">
                     <!--begin:Menu link-->
-                    <a href="#" class="menu-link">
+                    <a href="{{route('viewReportPage')}}" class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                             <span class="svg-icon svg-icon-2">
@@ -213,6 +210,64 @@ $allPermissions = Permission::pluck('id')->toArray();
         </div>
         <!--end::Menu-->
     </div>
+    @endrole
+    @role('Staff')
+    <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
+        <!--begin::Menu wrapper-->
+        <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5"
+            data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto"
+            data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
+            data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
+            <!--begin::Menu-->
+            <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
+                data-kt-menu="true" data-kt-menu-expand="false">
+                <!--begin:Menu item-->
+                <div class="menu-item pt-2">
+                    <!--begin:Menu content-->
+                    {{-- <div class="menu-content">
+                         <span class="menu-heading fw-bold text-uppercase fs-7">Home</span>
+                     </div> --}}
+                    <!--end:Menu content-->
+                </div>
+                <div class="menu-item  ">
+                    <!--begin:Menu link-->
+                    <a href="{{route('viewStaffHome')}}" class="menu-link">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="2" y="2" width="9" height="9" rx="2"
+                                        fill="currentColor" />
+                                    <rect opacity="0.3" x="13" y="2" width="9" height="9"
+                                        rx="2" fill="currentColor" />
+                                    <rect opacity="0.3" x="13" y="13" width="9" height="9"
+                                        rx="2" fill="currentColor" />
+                                    <rect opacity="0.3" x="2" y="13" width="9" height="9"
+                                        rx="2" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">Dashboards</span>
+                    </a>
+                    <!--end:Menu link-->
+
+                </div>
+
+                <!--end:Menu item-->
+
+            </div>
+
+            <!--end:Menu item-->
+            <!--begin:Menu item-->
+
+
+
+        </div>
+        <!--end::Menu-->
+    </div>
+    @endrole
     <!--end::Menu wrapper-->
     <!--end::sidebar menu-->
 
