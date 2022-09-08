@@ -48,13 +48,21 @@ class AuthenticatedSessionController extends Controller
         $ip = request()->ip();
         // $ip = '103.38.12.3';
         $data = \Location::get($ip);
-        $attendance = Attendance::where('date',Carbon::now()->toDateString())->where('user_id',Auth::id())->latest()->first();
-        $attendance->out = Carbon::now()->toTimeString();
-        if($data && $data->cityName)
-        {
-            $attendance->out_location = $data->cityName;
+        $attendance = Attendance::where('date', Carbon::now()->toDateString())->where('user_id', Auth::id())->latest()->first();
+        if ($attendance) {
+            $attendance->out = Carbon::now()->toTimeString();
+
+            $startTime = Carbon::parse($attendance->in);
+            $finishTime = Carbon::parse($attendance->out);
+            $total = $finishTime->diffInSeconds($startTime);
+            $total = gmdate('H:i:s', $total);
+
+            $attendance->total_hours = $total;
+            if ($data && $data->cityName) {
+                $attendance->out_location = $data->cityName;
+            }
+            $attendance->save();
         }
-        $attendance->save();
         // dd($attendance);
         Auth::guard('web')->logout();
         $request->session()->invalidate();

@@ -61,7 +61,7 @@ class LoginRequest extends FormRequest
         // dd($data);
         $attendance = new Attendance();
         $attendance->in = Carbon::now()->toTimeString();
-        $attendance->date = Carbon::now()->toDateString();
+        $attendance->date = Carbon::now();
         $attendance->user_id = Auth::id();
         if($data && $data->cityName)
         {

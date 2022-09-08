@@ -34,7 +34,7 @@
                                 @foreach ($staffs as $staff)
                                     <option value="{{ $staff->id }}">{{ $staff->name }}</option>
                                 @endforeach
-                                {{-- <option value="CANCELED">Cancelled</option> --}}
+
                             </select>
                         </div>
 
@@ -44,6 +44,29 @@
                     </div>
 
                 </form>
+            </div>
+            <hr>
+            <div class="row mt-2">
+                <div class="col-lg-12">
+                    <table id="reports" class="table table-striped border rounded gy-5 gs-7">
+                        <thead>
+                            <tr class="fw-bold fs-6 text-gray-800 px-7">
+                                <th>Name</th>
+                                <th>In time</th>
+                                <th>Out time</th>
+                                <th>Date</th>
+                                <th>In location</th>
+                                <th>Out location</th>
+                                <th>ُTotal Hours</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="table_body">
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <!--end::Table-->
         </div>
@@ -73,22 +96,36 @@
 
         cb(start, end);
 
+
+
         function getAttendanceData() {
             var date = $('#kt_daterangepicker_4').val();
             var user_id = $('#user_id').val();
             $.ajax({
                 type: 'get',
                 url: '{{ route('getReportData') }}',
-                data:{
-                    date:date,
+                data: {
+                    date: date,
                     user_id: user_id
                 },
                 success: function(data) {
-                    console.log(data);
+                    if (data.success) {
+                        document.getElementById("table_body").innerHTML = '';
+                        $.each(data.data, function(index, value) {
+                            console.log(value);
+                            document.getElementById("table_body").innerHTML += '<tr><td>' + value.user
+                                .name + '</td><td>' + value.in + '</td><td>' + value.out + '</td><td>' + value.date + '</td><td>' +
+                                value.in_location + '</td><td>' + value.out_location + '</td><td>' +
+                                value.total_hours + '</td></tr>';
+
+                        });
+                        console.log(data.success);
+                    }
                 }
             })
         }
     </script>
+
 
 
 
