@@ -8,3 +8,5 @@ then step 5 register an admin with /register route
 step 6 create a staff in all staff section
 
 step 7 logout and login with staff credential
+
+Note : Location system is only work with live server
